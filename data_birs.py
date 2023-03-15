@@ -14,8 +14,14 @@ def get_birthdays_per_week(users):
         else:
             current_birthdays[birthday.strftime("%A")].append(name)
         
-        
-    pprint(current_birthdays)  
+    today = datetime.now().date()
+    start_of_week = today - timedelta(days=today.weekday())
+    end_of_week = start_of_week + timedelta(days=6)
+    for i in range(7):
+        day = start_of_week + timedelta(days=i)
+        day_name = day.strftime("%A")
+        if day_name in current_birthdays:
+            print(f"{day_name}: {', '.join(current_birthdays[day_name])}") 
 
 
 if __name__ == "__main__":
